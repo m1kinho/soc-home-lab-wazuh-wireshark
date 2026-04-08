@@ -1,0 +1,29 @@
+# PowerShell Execution
+
+## Overview
+After gaining access, I simulated typical post-compromise behavior by launching PowerShell and executing a simple encoded command.
+
+## Attack Execution
+
+powershell
+powershell -enc ZQBjAGgAbwAgACIASABhAGMAawBlAGQAIgA=
+
+## Detection in Wazuh
+Relevant logs:
+- Event ID 4688 – Process creation
+
+Filtering example:
+process.name: "powershell.exe"
+
+## Analysis
+PowerShell itself is not malicious, but:
+- it is commonly abused
+- encoded commands are a red flag
+
+This is often where real attacks start to become visible.
+
+## MITRE ATT&CK
+T1059 – Command and Scripting Interpreter
+
+## Takeaway
+Process monitoring is essential. Without it, this stage would be invisible.
