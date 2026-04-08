@@ -1,0 +1,29 @@
+# SSH Brute Force Detection
+
+## Objective
+
+Detect repeated authentication attempts.
+
+## Steps
+
+1. Run Hydra attack:
+   hydra -l root -P rockyou.txt ssh://10.10.10.40
+2. Capture traffic
+
+## Filter
+
+tcp.port == 22
+
+## Findings
+
+* High number of connection attempts
+* Short-lived sessions
+
+## Indicators
+
+* Repeated login attempts
+* Consistent timing
+
+## Conclusion
+
+Typical brute-force attack behavior.
