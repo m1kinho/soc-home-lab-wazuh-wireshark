@@ -34,6 +34,16 @@ commonly expected in UK-based Security Operations Centres.
 
 ---
 
+## SOC Investigation Workflow
+1. Alert received in Wazuh
+2. Initial triage and severity assessment
+3. Log and context review
+4. Network traffic validation (Wireshark)
+5. Classification (True / False Positive)
+6. Recommendation and documentation
+
+---
+
 ## Skills Demonstrated
 - SOC alert triage (True/False Positive classification)
 - Log analysis and correlation
