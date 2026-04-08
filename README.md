@@ -45,4 +45,3 @@ commonly expected in UK-based Security Operations Centres.
 
 ## Target Role
 SOC Analyst Level 1 / Junior Security Analyst
-``
