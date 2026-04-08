@@ -1,0 +1,23 @@
+# Privilege Escalation
+
+## Overview
+In this step, I simulated an attempt to gain elevated privileges after initial access.
+
+## Attack Execution
+
+runas /user:Administrator cmd
+
+## Detection in Wazuh
+Relevant logs:
+- Event ID 4672 – Special privileges assigned
+
+## Analysis
+This event indicates that an account received elevated rights.
+
+On its own, it might be normal. Combined with earlier activity, it becomes highly suspicious.
+
+## MITRE ATT&CK
+T1068 – Privilege Escalation
+
+## Takeaway
+Privilege changes should always be reviewed in context. They are rarely isolated events.
