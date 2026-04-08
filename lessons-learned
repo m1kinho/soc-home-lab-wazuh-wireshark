@@ -1,0 +1,128 @@
+# Lessons Learned
+
+Building this home SOC lab and running multiple attack scenarios helped me move from theory to practical understanding of how attacks look in logs and network traffic.
+
+Using both Wazuh and Wireshark gave me visibility into different layers of the same activity.
+
+---
+
+## 1. Environment setup is a key skill
+Before running any attacks, I had to build a working lab:
+- VirtualBox with isolated internal network
+- multiple machines (Kali, Windows, Metasploitable, Wazuh)
+- proper IP addressing and connectivity
+
+This step alone taught me how real environments are structured and how data flows between systems.
+
+---
+
+## 2. Wazuh shows the endpoint perspective
+Wazuh helped me detect:
+- failed logins (4625)
+- successful logins (4624)
+- process execution (4688)
+- privilege escalation (4672)
+
+It provides structured, searchable data — exactly what a SOC analyst works with daily.
+
+---
+
+## 3. Wireshark shows the network behavior
+Wireshark allowed me to analyze traffic in detail across multiple scenarios:
+
+### Nmap Port Scan Detection
+- multiple SYN packets sent to different ports
+- clear scanning pattern from a single source IP
+
+I learned how reconnaissance activity looks at packet level.
+
+---
+
+### SSH Brute Force Detection
+- repeated login attempts over SSH
+- visible patterns in TCP connections and authentication attempts
+
+This matched what I saw in logs, reinforcing how attacks appear across layers.
+
+---
+
+### HTTP Credential Theft Analysis
+- captured HTTP traffic containing login data
+- observed credentials transmitted in plain text
+
+This demonstrated why unencrypted protocols are dangerous and how attackers can intercept sensitive data.
+
+---
+
+## 4. Logs vs network traffic – two sides of the same attack
+A key takeaway was understanding the difference:
+
+- Wazuh → shows **what happened** (e.g. failed login)
+- Wireshark → shows **how it happened** (e.g. repeated connection attempts)
+
+Combining both gives a full picture of the attack.
+
+---
+
+## 5. Not all attacks generate useful logs
+During exploitation attempts (e.g. Metasploit):
+- some actions did not appear clearly in Wazuh
+- but network activity was still visible in Wireshark
+
+This showed that visibility gaps are normal and must be compensated with multiple tools.
+
+---
+
+## 6. Network controls can stop attacks early
+Example:
+- SMB port 445 was filtered
+- EternalBlue exploit failed
+
+Even without detection, proper network configuration prevented exploitation.
+
+---
+
+## 7. Building an attack timeline is critical
+By combining data from Wazuh and Wireshark, I could reconstruct full attack chains:
+
+1. Nmap scan (Wireshark)
+2. Brute-force attempts (Wireshark + Wazuh)
+3. Successful login (Wazuh)
+4. Command execution (Wazuh)
+5. Privilege escalation (Wazuh)
+
+This reflects how real SOC investigations are performed.
+
+---
+
+## 8. Simple techniques still produce strong signals
+Even basic attacks like:
+- port scanning
+- brute force
+- credential sniffing
+
+generated clear and detectable patterns.
+
+Detection is often about recognizing behavior, not just signatures.
+
+---
+
+## 9. Hands-on labs changed how I think
+After completing these scenarios:
+- I better understand attacker behavior
+- I know how to investigate alerts
+- I can correlate logs with network traffic
+
+This shifted my mindset from learning tools to thinking like an analyst.
+
+---
+
+## Final Thoughts
+This lab showed me that effective security monitoring is about visibility and correlation.
+
+By combining:
+- endpoint logs (Wazuh)
+- network traffic analysis (Wireshark)
+- and realistic attack simulations
+
+I was able to recreate a simplified but practical SOC workflow in a home lab environment.
