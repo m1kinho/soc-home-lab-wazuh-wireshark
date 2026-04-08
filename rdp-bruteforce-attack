@@ -1,0 +1,36 @@
+# RDP Brute Force Attack
+
+## Overview
+In this scenario, I simulated a brute-force attack against a Windows 10 machine using the Remote Desktop Protocol (RDP). The goal was to generate authentication failures and observe how they appear in Wazuh.
+
+## Environment
+- Attacker: Kali Linux (10.10.10.10)
+- Target: Windows 10 (10.10.10.30)
+
+## Attack Execution
+I used Hydra with a common password list to attempt multiple logins:
+
+hydra -l test -P rockyou.txt rdp://10.10.10.30
+
+This generated a high number of failed login attempts in a short period of time.
+
+## Detection in Wazuh
+Relevant logs:
+- Event ID 4625 – Failed logon attempts
+
+Filtering example:
+win.system.eventID: 4625
+
+## Analysis
+The pattern was very clear:
+- repeated login failures
+- same source IP
+- short time interval
+
+This is a typical brute-force signature.
+
+## MITRE ATT&CK
+T1110 – Brute Force
+
+## Takeaway
+Even a simple attack like this creates a strong signal in authentication logs. Easy win for detection if logging is enabled.
