@@ -1,0 +1,24 @@
+#  Nmap Port Scan Detection
+
+## Objective
+
+Detect reconnaissance activity using SYN scan patterns.
+
+## Steps
+
+1. Run scan:
+   nmap -sS <target_ip>
+2. Capture traffic in Wireshark
+
+## Filter
+
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+
+## Findings
+
+* Multiple SYN packets
+* No completed handshake
+
+## Conclusion
+
+Indicates stealth port scanning activity.
