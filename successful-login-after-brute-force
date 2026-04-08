@@ -1,0 +1,26 @@
+# Successful Login After Brute Force
+
+## Overview
+This scenario builds on the brute-force attack. After multiple failed attempts, I logged in using valid credentials to simulate account compromise.
+
+## Attack Execution
+Manual login:
+- Username: test
+- Password: Password123!
+
+## Detection in Wazuh
+Relevant logs:
+- Event ID 4624 – Successful logon
+
+## Analysis
+What makes this interesting is the context:
+- login success happened shortly after multiple failures
+- same source IP was involved
+
+Individually, a successful login is normal. In sequence, it becomes suspicious.
+
+## MITRE ATT&CK
+T1078 – Valid Accounts
+
+## Takeaway
+Correlation matters more than individual events. This is where SIEM becomes useful.
